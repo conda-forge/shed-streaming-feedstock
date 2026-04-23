@@ -12,15 +12,15 @@ source:
 
 build:
   noarch: python
-  number: 3
+  number: 4
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
-  build:
-    - python >=3.6,<3.10
+  host:
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6,<3.10
+    - python >={{ python_min }},<3.10
     - bluesky ==1.6.4
     - databroker
     - dask
@@ -35,6 +35,8 @@ requirements:
     - xonsh
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - shed_streaming
     - shed_streaming.translation
